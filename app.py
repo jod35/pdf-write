@@ -1,23 +1,35 @@
-from PyPDF2 import PdfFileReader
+from flask import (
+    Flask,
+    render_template,
+    redirect,
+    request,
+    url_for
+)
+
+from PyPDF2 import PdfFileReader,PdfFileWriter
 import os
 
-base_dir=os.path.dirname(os.path.realpath(__file__))
 
-pdf_path=os.path.join(base_dir,'Chapter10.pdf')
+app=Flask(__name__)
 
-pdf=PdfFileReader(str(pdf_path))
+app.config['UPLOAD_PATH']='uploads'
+
+@app.route('/', methods=['GET', 'POST'])
+def index():
+    if request.method == 'POST':
+
+        if request.files:
+            pdf_file=request.files['file']
+
+            pdf_file_name=os.path.join(app.config['UPLOAD_PATH'],pdf_file.filename)
+
+            pdf_file.save(pdf_file_name)
+
+            return redirect('/')
+        print("Hello")
+        return redirect('/')
+    return render_template('index.html')
 
 
-# print(pdf.getNumPages())
-first_page=pdf.getPage(30)
-
-
-with open('document.txt',mode='w') as final_file:
-    title=pdf.documentInfo.title
-    num_pages=pdf.getNumPages()
-
-    final_file.write(f"{title} \\n NUmber of pages {num_pages}")
-
-    for page in pdf.pages:
-        text=page.extractText()
-        final_file.write(text)
+if __name__ == '__main__':
+    app.run(debug=True)
