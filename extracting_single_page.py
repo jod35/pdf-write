@@ -14,7 +14,7 @@ first_page=input_pdf_file.getPage(0)
 pdf_writer=PdfFileWriter()
 
 #create a blank page and add the first page to it
-pdf_writer.addBlankPage(width=100,height=100)
+pdf_writer.addPage(first_page)
 
 with open('first_page.pdf','wb') as first_page_pdf_file:
     pdf_writer.write(first_page_pdf_file)
