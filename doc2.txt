@@ -1,0 +1,308 @@
+Title 
+ 
+ Number of pages 
+31Chapter 10: Performance PatternsSOFT 437 ŒChapter 102
+PatternsŁA pattern is a common solution to a problem that 
+occurs in many different contexts
+ŁPatterns capture expert knowledge about ﬁbest 
+practicesﬂ in software design in a form
+ŒAllows knowledge to be reused
+ŒApplied in design of many different types of software
+ŁPattern address the problem of ﬁreinventing the 
+wheelﬂSOFT 437 ŒChapter 103
+History of PatternsŁThe use of patterns in software development has its 
+roots in the work of Christopher Alexander, an 
+
+architect:Each patterns describes a problem which 
+occurs over and over again
+in our environments, and then 
+describes the core of the solution
+to that problem, in 
+such a way that you can 
+usethis solution in million 
+times over, 
+without ever doing it the same way twice
+.SOFT 437 ŒChapter 104
+Design PatternsŁIn the late 1980s, several people in the software 
+development community began to apply Alexander™s 
+
+ideas to software
+ŒDesign Patterns: Elements of Reusable Object-Oriented Software, by Erich Gamma, Richard helm, 
+Ralph Johnson, and John Vlissi
+des (the Gang of Four)ŁDesign patterns identify abstractions that are at a 
+higher level than individual classes and objects
+ŒConstruct the software using patterns
+ŁSingleton Pattern, Proxy Pattern
+SOFT 437 ŒChapter 105
+Most popular book in Computer ScienceSold over one million copies in print
+SOFT 437 ŒChapter 106
+History of EclipseŁ1997 ŒVisualAge for Java ( implemented in small 
+talk)Ł1999 --VisualAge for Java Micro-Edition (code 
+based from here)Ł2001 ŒEclipse (change name for marketing issue)
+
+Ł2003 ŠEclipse.org
+
+Ł2005-Eclipse V3.1
+
+Ł2006-Eclipse V3.2
+SOFT 437 ŒChapter 107
+Architecture of EclipseŁThe eclipse plug-in 
+architecture Œincrease 
+
+modularityŁEverything is a plug-in
+
+ŁExtension points 
+Œits component 
+configuration points SOFT 437 ŒChapter 108
+Performance PatternsŁThe performance patterns de
+scribe best practices for 
+producing responsive, scalable software
+ŁPerformance patterns complement and extend the 
+performance principlesŁSeven performance patterns address 
+performanceand scalabilityŁFast Path
+ŁFirst Things First
+
+ŁCoupling
+
+ŁBatching
+ŁAlternate Routes
+ŁFlex time
+
+ŁSlender Cyclic 
+FunctionsSOFT 437 ŒChapter 109
+Performance Patterns vs. Design PatternsŁEach performance pattern is a realization of one or 
+more of the performance principles
+ŁThe performance patterns are at a higher level of 
+abstraction than design patterns
+ŒA design pattern may provide an implementation of a 
+performance patternPerformance PrinciplesCentering Principles
+Performance PatternsFast Path
+Design PatternsProxy
+level ofabstractionSOFT 437 ŒChapter 1010
+Pattern TemplateŁEach pattern is defined in a standard template:
+ŒName: The title of the subsection
+ŒProblem: What is motivating us to apply this pattern?
+ŒSolution: How do we solve the problem?
+ŒBenefits: What are the potential positive outcomes of 
+applying this pattern?ŒConsequences: What are the potential shortcomings and consequences of applying this patterns?
+SOFT 437 ŒChapter 1011
+Fast PathŁConcerned with improving response time by 
+reducing the amount of processing required for 
+
+dominant workloadsŒExample: menus in automated telephone system
+ŁProblem: 
+dominant workloadŁSolution: 
+ŒCreate an express ﬁtrainﬂ that stops only at the most 
+important stations along the routeŒIdentify the data most frequently used together
+
+ŒImplemented by Proxy patterns
+
+ŒBased mainly on the 
+centering principleSOFT 437 ŒChapter 1012
+myImageSOFT 437 ŒChapter 1013
+Fast Path (Con™t)ŁBenefits:
+ŒReduces the response time for dominant workload 
+functions by reducing the amount of processing 
+required for the most frequent uses of the softwareŒReduces the overall load on the system by avoiding 
+some resource consumptionŁConsequences:
+ŒIt is not enough to recognize the need for the Fast Path 
+you must also ensure that it is likely to be used
+ŒUsage patterns change over time
+
+ŒUse the instrumenting principle to monitor usage 
+patterns, and adapt your system to changing patternsSOFT 437 ŒChapter 1014
+First Things First
+ŁFocus on the important processing tasks to ensure that, if 
+everything cannot be completed within the time available, 
+
+then the least important tasks will be the ones omitted
+ŁProblem: 
+ŒTemporary overload may cause input data to be lost or response 
+times to be unacceptably slow
+ŒExample: online-trading 
+ŁSolution: 
+ŒAssign priorities to tasks and execute them so that the most 
+important activities receive preference
+ŒExample: transaction of billions of dollars 
+
+ŒUse the 
+Centering Principleto focus attention on the most important workSOFT 437 ŒChapter 1015
+First Things First (Con™t)
+ŁBenefits
+ŒFocuses on the most important tasks and ensures that 
+they completeŒMaximizes the quality of service of the system and 
+improves scalabilityŁConsequences
+ŒOnly appropriate if the overload is temporary
+ŒIf the overload is not temporary, reduce the amount of 
+processing required by other means or upgrade the 
+processing environmentSOFT 437 ŒChapter 1016
+CouplingŁMatch the interface of an object with its most 
+frequent usesŁProblem: Applications use fine-grained objects 
+to request remote information 
+ŒThe number of interactions is large
+ŒCost of remote calls is high in distributed systems
+
+ŒResponsiveness is poor in multi-tier Web 
+applicationsŒUsing a class structure identical to the physical 
+database schema can lead to performance 
+
+problemsSOFT 437 ŒChapter 1017
+Coupling (Con™t)ŁSolution:
+ŒUse more 
+coarse-grainedobjects to eliminate frequent requests for small amount of information
+ŒThe best way of constructing the aggregation will depend 
+on the access patterns for the data 
+ŒData that is frequently accessed at the same time should be 
+grouped into an aggregationŒUse the 
+Centering Principleto identify interfacesŒUse the 
+Locality Principle
+to combine information ŒUse the 
+Processing vs. Frequency Principleto minimize the total processing required for the interfaceSOFT 437 ŒChapter 1018
+Last Name:First 
+Name:Customer Number:
+Last Name:
+Last Name:
+Last Name:
+Order Date:
+Delivery Date:
+::::Customer Address:
+Pay by Credit 
+Card
+Pay by Cash or Check
+Credit Status:
+Order item:
+Product Name:
+Product Code:
+Available Order item:
+SOFT 437 ŒChapter 1019
+Coupling (Con™t)ŁBenefits:
+ŒMatch the business tasks to the processing required to 
+accomplish themŒReduce the total resource requirements of the system
+ŁConsequences:
+ŒStart by identifying information that is stable, and use 
+those objects to reduce the amount of communication 
+overhead required to obtain data
+SOFT 437 ŒChapter 1020
+BatchingŁCombines frequent requests for services to save the overhead 
+of initialization, transmission, and termination processing for 
+
+the requestŁProblem:
+ŒRequested tasks require considerable overhead processing 
+for initialization, termination, and in distributed systems, 
+
+for transmitting data and requests
+ŒFor very frequent tasks, the amount of time spent in 
+overhead processing may exceed the amount of real 
+
+processing on the systemŒExample
+ŁInsert new rows 
+ŁSend secured messages
+SOFT 437 ŒChapter 1021
+Batching (Con™t)ŁSolution:
+ŒCombine the requests into batches so the overhead 
+processing is executed once for the entire batch 
+instead of for each individual itemŁSender-side batching (e.g., insert new rows)
+ŁReceiver-side batching (e.g., transfer secured messages 
+over links)ŒUsing the 
+Processing vs. Frequency Principle to minimize the product of the processing times the 
+
+frequency of requestsSOFT 437 ŒChapter 1022
+Batching (Con™t)ŁBenefits:
+ŒReduce the total amount of processing required for all 
+tasksŒImprove responsiveness by reducing the contention delay
+
+ŒImprove scalability by freeing up resources
+ŁConsequences:
+ŒBatching is appropriate for frequent tasks that require a 
+large amount of overhead processing
+ŒBatching is most effective when the amount of overhead 
+and the frequency of requests are both high
+SOFT 437 ŒChapter 1023
+Alternate RoutesŁSpread the demand for high-usage objects spatially to 
+different objects or locations
+ŁReduce contention delays for the objects
+
+ŁProblems:
+ŒOccurs frequently in database systems when many processes 
+need exclusive access to the same physical location, usually to 
+
+execute an update
+ŒHappens when several processes must coordinate with a single 
+concurrent process
+ŒWhen a single dispatching process receives inbound requests 
+and determines which subsequent process is to handle the 
+
+requestSOFT 437 ŒChapter 1024
+Alternate Routes (Con™t)ŁSolution: 
+ŒFind an alternate route for the processing
+ŁIn database access situation, find a way for the access 
+to go to different physical locations
+ŁFor the process coordination problems, find a way to 
+route requests to different processesŁFor the one-inbound dispatcher problem, use multiple 
+instances of the dsipatcherŒUse the Spread-the-Load Principle
+SOFT 437 ŒChapter 1025
+Alternate Routes (Con™t)ŁBenefits:
+ŒReduces delays due to serialization
+ŒImproves responsiveness and scalability
+
+ŒReduces the variability in performance
+ŁConsequences:
+ŒMake sure that your alternate route effectively spreads 
+the load spatiallySOFT 437 ŒChapter 1026
+Flex TimeŁSpread the demand for high-usage objects temporally 
+to a different period of time
+ŁReduce contention delays for the objects
+
+ŁProblems:
+ŒProcessing is required at a particular frequency, or at a 
+particular time of dayŒUsers are allowed to select the time of day when they 
+want the reports, but are all given the same choices for 
+time of daySOFT 437 ŒChapter 1027
+Flex Time (Con™t)ŁSolution:
+ŒIdentify the functions that execute repeatedly at regular, 
+specific time intervals, and modify the time of their 
+
+processingŒSolution to the time-of-day problem is to move the 
+processing to a different time of day
+ŒSolution to the processing-time-choice problem is to 
+generate a random number for the selection choices
+ŒSolution to the periodic processing problem is to do less 
+work more oftenŒApply the Spread-the-Load Principles
+SOFT 437 ŒChapter 1028
+Flex Time (con™t)ŁBenefits:
+ŒSpread the load temporally to reduce the congestion
+ŒReduces the amount of time that processes are blocked and 
+cannot proceed
+ŒReduces the resource demand so that concurrent process 
+encounter fewer queueing delays for computer resources
+ŁConsequences:
+ŒSome of the Flex Time solutions require more processing
+ŒThe net effect is to reduce the time that processes wait in 
+queuesŒThe Flex Time has the same potential problem as Alternate 
+RoutesŁif everyone chooses the same alternate time, you have a 
+new bottleneckSOFT 437 ŒChapter 1029
+Slender Cyclic FunctionsŁConcerned with processing that must execute at 
+regular intervals
+ŁProblem:
+ŒA cyclic or periodic function is characterized by its:
+ŁPeriod: the amount of time between successive 
+executionsŁExecution time: the amount of time required for the 
+function to executeŁSlack time: the amount of time between the completion 
+of execution and the end of the period
+SOFT 437 ŒChapter 1030
+Slender Cyclic Functions (Con™t)
+ŁSolution:
+ŒIdentify the functions that execute repeatedly at 
+regular, specific time intervals, and minimize their 
+
+processing requirementsŒUse both the Centering Principle and the Shared 
+Resources PrinciplesŁBenefits:
+ŒReduce the processing requirements so that we have 
+more resources available to share and thus reduce 
+queueing delaysSOFT 437 ŒChapter 1031
+Slender Cyclic Functions (Con™t)
+ŁConsequences:
+ŒOperating conditions may change over time
+ŒThe cycle frequency may need to change, or the 
+amount of processing per cycle may changeŒInstrument systems and monitor their performance 
+over time for early warning of potential problems

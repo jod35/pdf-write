@@ -1,23 +1,23 @@
 from PyPDF2 import PdfFileReader
 import os
 
-
 base_dir=os.path.dirname(os.path.realpath(__file__))
-
-# print(base_dir)
 
 pdf_path=os.path.join(base_dir,'Chapter10.pdf')
 
-# print(pdf_path)
-
 pdf=PdfFileReader(str(pdf_path))
 
-first=pdf.getPage(0)
-print(first)
 
-first_page_text=first.extractText()
+# print(pdf.getNumPages())
+first_page=pdf.getPage(30)
 
-print(f"\n {first_page_text}")
 
-for page in pdf.pages:
-    print(page.extractText())
+with open('document.txt',mode='w') as final_file:
+    title=pdf.documentInfo.title
+    num_pages=pdf.getNumPages()
+
+    final_file.write(f"{title} \\n NUmber of pages {num_pages}")
+
+    for page in pdf.pages:
+        text=page.extractText()
+        final_file.write(text)
