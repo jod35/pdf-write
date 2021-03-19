@@ -9,11 +9,17 @@ from flask import (
 from PyPDF2 import PdfFileReader,PdfFileWriter
 import os
 import json
-
+from pdf2docx import parse
 
 app=Flask(__name__)
 
 app.config['UPLOAD_PATH']='static/uploads'
+
+base_dir=os.path.dirname(os.path.realpath(__file__))
+
+static_dir=os.path.join(base_dir,'static/')
+
+uploads_dir=os.path.join(static_dir, 'uploads')
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -54,8 +60,15 @@ def show_file_content(filename):
     }
     return render_template('fileview.html',**context)
 
+@app.route('/edit/<file_name>')
+def edit_pdf_file(file_name):
+
+    file_to_edit=os.path.join(uploads_dir,file_name)
+    
+    parse(file_to_edit,output_file,start=0,end=None)
 
 
+    return render_template('file-edit.html')
 
 
 
