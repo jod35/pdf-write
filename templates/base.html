@@ -7,11 +7,15 @@
     <link rel="stylesheet" href="{{url_for('static',filename='main.css')}}">
     <link rel="stylesheet" href="{{url_for('static',filename='dropzone.css')}}">
     <script src="{{url_for('static',filename='dropzone.js')}}"></script>
+    <script src="{{url_for('static',filename='pdfobject.js')}}"></script>
+    <script src="{{url_for('static',filename='custom.js')}}"></script>
     <title>PDF Tool</title>
 </head>
 <body>
     <header class="bg-primary">
-        <h1>PDF Tool</h1>
+        <a href="{{url_for('index')}}" class="logo">
+            <h1>PDF Tool</h1>
+        </a>
     </header>
     <div class="main">
        

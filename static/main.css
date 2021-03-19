@@ -7,6 +7,10 @@
 main{
     min-height: 100vh;
 }
+.logo{
+    color: white;
+    text-decoration: none;
+}
 header{
     background-color: rgb(7, 61, 116);
     color: white;
@@ -25,6 +29,10 @@ header{
 }
 .result{
     display: none;
+}
+.container{
+    width: 80%;
+    margin: auto;
 }
 @media(max-width:767px){
     .form{

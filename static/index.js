@@ -17,3 +17,6 @@ Dropzone.options.myAwesomeDropzone = {
       })
     }
   };
+
+
+

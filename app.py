@@ -8,11 +8,12 @@ from flask import (
 
 from PyPDF2 import PdfFileReader,PdfFileWriter
 import os
+import json
 
 
 app=Flask(__name__)
 
-app.config['UPLOAD_PATH']='uploads'
+app.config['UPLOAD_PATH']='static/uploads'
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -26,10 +27,37 @@ def index():
             pdf_file.save(pdf_file_name)
 
             return redirect('/')
-        print("Hello")
+
+
         return redirect('/')
     return render_template('index.html')
 
 
+@app.route('/<filename>')
+def show_file_content(filename):
+
+
+    pdf_file_name=os.path.join(app.config['UPLOAD_PATH'],filename)
+
+    pdf_file = PdfFileReader(pdf_file_name)
+
+
+    pages=pdf_file.getNumPages()
+
+    text=json.dumps(str(pdf_file_name))
+
+
+    context={
+        'pages':pages,
+        'file_name':filename,
+        'text':text
+    }
+    return render_template('fileview.html',**context)
+
+
+
+
+
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True,port=8000)
